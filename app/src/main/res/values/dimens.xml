@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="leftMargin"> 17sp </dimen>
+    <dimen name="rightMargin">14sp </dimen>
+    <dimen name="buttonTextSize">26sp</dimen>
+    <dimen name="screenTextSize">40sp</dimen>
+    <dimen name="buttonSize">88dp</dimen>
+</resources>

@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mainGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="17dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mainGuideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/rightMargin" />
+
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/leftMargin"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/museo"
+        android:text="@string/app_name"
+        android:textColor="@color/textColor"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/screenView"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/mainGuideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/mainGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/appName"
+        app:srcCompat="@drawable/screen_image" />
+
+    <TextView
+        android:id="@+id/backgroundScreentText"
+        android:layout_width="320dp"
+        android:layout_height="52dp"
+        android:fontFamily="@font/digital_numbers"
+        android:gravity="center"
+        android:text="@string/startNumbers"
+        android:textColor="@color/startTextColor"
+        android:textSize="@dimen/screenTextSize"
+        app:layout_constraintBottom_toBottomOf="@+id/screenView"
+        app:layout_constraintEnd_toEndOf="@+id/screenView"
+        app:layout_constraintStart_toStartOf="@+id/screenView"
+        app:layout_constraintTop_toTopOf="@+id/screenView" />
+
+    <TextView
+        android:id="@+id/screenText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="-2dp"
+        android:layout_marginEnd="2dp"
+        android:fontFamily="@font/digital_numbers"
+        android:gravity="center|left"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/screenTextSize"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundScreentText"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundScreentText"
+        app:layout_constraintStart_toStartOf="@+id/backgroundScreentText"
+        app:layout_constraintTop_toTopOf="@+id/backgroundScreentText" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftButtonsGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="17dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightButtonsGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="14dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/firstRowGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="184dp" />
+
+    <ImageView
+        android:id="@+id/ac_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="numbersEvent"
+        app:layout_constraintBottom_toTopOf="@+id/seven_button"
+        app:layout_constraintEnd_toStartOf="@+id/negative_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/leftButtonsGuideline"
+        app:layout_constraintTop_toTopOf="@+id/firstRowGuideline"
+        app:srcCompat="@drawable/button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/ac_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="false"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/AC_text"
+        android:textColor="@color/mainTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ac_button"
+        app:layout_constraintEnd_toEndOf="@+id/ac_button"
+        app:layout_constraintStart_toStartOf="@+id/ac_button"
+        app:layout_constraintTop_toTopOf="@+id/ac_button" />
+
+    <ImageView
+        android:id="@+id/negative_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="makeNegativeEvent"
+        app:layout_constraintBottom_toTopOf="@+id/eight_button"
+        app:layout_constraintEnd_toStartOf="@+id/percent_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ac_button"
+        app:layout_constraintTop_toTopOf="@+id/firstRowGuideline"
+        app:srcCompat="@drawable/button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/negative_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/negative_text"
+        android:textColor="@color/mainTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/negative_button"
+        app:layout_constraintEnd_toEndOf="@+id/negative_button"
+        app:layout_constraintStart_toStartOf="@+id/negative_button"
+        app:layout_constraintTop_toTopOf="@+id/negative_button" />
+
+    <ImageView
+        android:id="@+id/percent_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="percentActionEvent"
+        app:layout_constraintBottom_toTopOf="@+id/nine_button"
+        app:layout_constraintEnd_toStartOf="@+id/div_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/negative_button"
+        app:layout_constraintTop_toTopOf="@+id/firstRowGuideline"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:srcCompat="@drawable/button_image"
+        tools:ignore="SpeakableTextPresentCheck,DuplicateClickableBoundsCheck" />
+
+    <TextView
+        android:id="@+id/percent_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="false"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/percent_text"
+        android:textAllCaps="true"
+        android:textColor="@color/mainTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/percent_button"
+        app:layout_constraintEnd_toEndOf="@+id/percent_button"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toStartOf="@+id/percent_button"
+        app:layout_constraintTop_toTopOf="@+id/percent_button"
+        app:layout_constraintVertical_bias="0.555" />
+
+    <ImageView
+        android:id="@+id/div_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="actionsEvents"
+        app:layout_constraintBottom_toTopOf="@+id/multiply_button"
+        app:layout_constraintEnd_toStartOf="@+id/rightButtonsGuideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/percent_button"
+        app:layout_constraintTop_toTopOf="@+id/firstRowGuideline"
+        app:srcCompat="@drawable/blue_button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/div_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/div_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/secondRowGuideline"
+        app:layout_constraintEnd_toEndOf="@+id/div_button"
+        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintStart_toEndOf="@+id/multiply_button"
+        app:layout_constraintStart_toStartOf="@+id/div_button"
+        app:layout_constraintTop_toTopOf="@+id/div_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/secondRowGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="278dp" />
+
+    <ImageView
+        android:id="@+id/seven_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="numbersEvent"
+        app:layout_constraintBottom_toTopOf="@+id/four_button"
+        app:layout_constraintEnd_toStartOf="@+id/eight_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/leftButtonsGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/ac_button"
+        app:srcCompat="@drawable/button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/seven_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/seven_text"
+        android:textColor="@color/mainTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/seven_button"
+        app:layout_constraintEnd_toEndOf="@+id/seven_button"
+        app:layout_constraintStart_toStartOf="@+id/seven_button"
+        app:layout_constraintTop_toTopOf="@+id/seven_button" />
+
+    <ImageView
+        android:id="@+id/eight_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="numbersEvent"
+        app:layout_constraintBottom_toTopOf="@+id/five_button"
+        app:layout_constraintEnd_toStartOf="@+id/nine_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/seven_button"
+        app:layout_constraintTop_toBottomOf="@+id/negative_button"
+        app:srcCompat="@drawable/button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/eight_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/eight_text"
+        android:textColor="@color/mainTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/eight_button"
+        app:layout_constraintEnd_toEndOf="@+id/eight_button"
+        app:layout_constraintStart_toStartOf="@+id/eight_button"
+        app:layout_constraintTop_toTopOf="@+id/eight_button" />
+
+    <ImageView
+        android:id="@+id/nine_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="numbersEvent"
+        app:layout_constraintBottom_toTopOf="@+id/six_button"
+        app:layout_constraintEnd_toStartOf="@+id/multiply_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/eight_button"
+        app:layout_constraintTop_toBottomOf="@+id/percent_button"
+        app:srcCompat="@drawable/button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/nine_button_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/nine_text"
+        android:textColor="@color/mainTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/nine_button"
+        app:layout_constraintEnd_toEndOf="@+id/nine_button"
+        app:layout_constraintStart_toStartOf="@+id/nine_button"
+        app:layout_constraintTop_toTopOf="@+id/nine_button" />
+
+    <ImageView
+        android:id="@+id/multiply_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="actionsEvents"
+        app:layout_constraintBottom_toTopOf="@+id/minus_button"
+        app:layout_constraintEnd_toStartOf="@+id/rightButtonsGuideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/nine_button"
+        app:layout_constraintTop_toBottomOf="@+id/div_button"
+        app:srcCompat="@drawable/blue_button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/multiply_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/multiply_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/multiply_button"
+        app:layout_constraintEnd_toEndOf="@+id/multiply_button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/multiply_button"
+        app:layout_constraintStart_toStartOf="@+id/minus_button"
+        app:layout_constraintTop_toTopOf="@+id/multiply_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/thirdRowGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="372dp" />
+
+    <ImageView
+        android:id="@+id/four_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="numbersEvent"
+        app:layout_constraintBottom_toTopOf="@+id/one_button"
+        app:layout_constraintEnd_toStartOf="@+id/five_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/leftButtonsGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/seven_button"
+        app:srcCompat="@drawable/button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/four_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/four_text"
+        android:textColor="@color/mainTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/four_button"
+        app:layout_constraintEnd_toEndOf="@+id/four_button"
+        app:layout_constraintStart_toStartOf="@+id/four_button"
+        app:layout_constraintTop_toTopOf="@+id/four_button" />
+
+    <ImageView
+        android:id="@+id/five_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="numbersEvent"
+        app:layout_constraintBottom_toTopOf="@+id/two_button"
+        app:layout_constraintEnd_toStartOf="@+id/six_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/four_button"
+        app:layout_constraintTop_toBottomOf="@+id/eight_button"
+        app:srcCompat="@drawable/button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/five_text_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/five_text"
+        android:textColor="@color/mainTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/five_button"
+        app:layout_constraintEnd_toEndOf="@+id/five_button"
+        app:layout_constraintStart_toStartOf="@+id/five_button"
+        app:layout_constraintTop_toTopOf="@+id/five_button" />
+
+    <ImageView
+        android:id="@+id/six_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="numbersEvent"
+        app:layout_constraintBottom_toTopOf="@+id/three_button"
+        app:layout_constraintEnd_toStartOf="@+id/minus_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/five_button"
+        app:layout_constraintTop_toBottomOf="@+id/nine_button"
+        app:srcCompat="@drawable/button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/six_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/six_text"
+        android:textColor="@color/mainTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/six_button"
+        app:layout_constraintEnd_toEndOf="@+id/six_button"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="@+id/six_button"
+        app:layout_constraintTop_toTopOf="@+id/six_button" />
+
+    <ImageView
+        android:id="@+id/minus_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="actionsEvents"
+        app:layout_constraintBottom_toTopOf="@+id/plus_button"
+        app:layout_constraintEnd_toStartOf="@+id/rightButtonsGuideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/six_button"
+        app:layout_constraintTop_toBottomOf="@+id/multiply_button"
+        app:srcCompat="@drawable/blue_button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/minus_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/minus_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/minus_button"
+        app:layout_constraintEnd_toEndOf="@+id/minus_button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/minus_button"
+        app:layout_constraintTop_toTopOf="@+id/minus_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fourthRowGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="466dp" />
+
+    <ImageView
+        android:id="@+id/one_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="numbersEvent"
+        app:layout_constraintBottom_toTopOf="@+id/zero_button"
+        app:layout_constraintEnd_toStartOf="@+id/two_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/leftButtonsGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/four_button"
+        app:srcCompat="@drawable/button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/one_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/one_text"
+        android:textColor="@color/mainTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/one_button"
+        app:layout_constraintEnd_toEndOf="@+id/one_button"
+        app:layout_constraintStart_toStartOf="@+id/one_button"
+        app:layout_constraintTop_toTopOf="@+id/one_button" />
+
+    <ImageView
+        android:id="@+id/two_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="numbersEvent"
+        app:layout_constraintBottom_toTopOf="@+id/zero_button"
+        app:layout_constraintEnd_toStartOf="@+id/three_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/one_button"
+        app:layout_constraintTop_toBottomOf="@+id/five_button"
+        app:srcCompat="@drawable/button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/two_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/two_text"
+        android:textColor="@color/mainTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/two_button"
+        app:layout_constraintEnd_toEndOf="@+id/two_button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/two_button"
+        app:layout_constraintTop_toTopOf="@+id/two_button"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/three_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="numbersEvent"
+        app:layout_constraintBottom_toTopOf="@+id/comma_button"
+        app:layout_constraintEnd_toStartOf="@+id/plus_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/two_button"
+        app:layout_constraintTop_toBottomOf="@+id/six_button"
+        app:srcCompat="@drawable/button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/three_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/three_text"
+        android:textColor="@color/mainTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/three_button"
+        app:layout_constraintEnd_toEndOf="@+id/three_button"
+        app:layout_constraintStart_toStartOf="@+id/three_button"
+        app:layout_constraintTop_toTopOf="@+id/three_button" />
+
+    <ImageView
+        android:id="@+id/plus_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="actionsEvents"
+        app:layout_constraintBottom_toTopOf="@+id/equal_button"
+        app:layout_constraintEnd_toStartOf="@+id/rightButtonsGuideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/three_button"
+        app:layout_constraintTop_toBottomOf="@+id/minus_button"
+        app:srcCompat="@drawable/blue_button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/plus_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/plus_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/fifthRowGuideline"
+        app:layout_constraintEnd_toEndOf="@+id/plus_button"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="@+id/plus_button"
+        app:layout_constraintTop_toTopOf="@+id/plus_button" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fifthRowGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="560dp" />
+
+    <ImageView
+        android:id="@+id/zero_button"
+        android:layout_width="200dp"
+        android:layout_height="@dimen/buttonSize"
+        android:layout_marginEnd="6dp"
+        android:clickable="true"
+        android:onClick="numbersEvent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintEnd_toEndOf="@+id/two_button_text"
+        app:layout_constraintEnd_toStartOf="@+id/comma_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="@+id/one_button"
+        app:layout_constraintTop_toTopOf="@+id/fifthRowGuideline"
+        app:srcCompat="@drawable/big_button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/zero_button_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/zero_text"
+        android:textColor="@color/mainTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/zero_button"
+        app:layout_constraintEnd_toEndOf="@+id/zero_button"
+        app:layout_constraintStart_toStartOf="@+id/zero_button"
+        app:layout_constraintTop_toTopOf="@+id/zero_button" />
+
+    <ImageView
+        android:id="@+id/comma_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="numbersEvent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintEnd_toEndOf="@+id/three_button"
+        app:layout_constraintStart_toStartOf="@+id/three_button"
+        app:layout_constraintTop_toTopOf="@+id/fifthRowGuideline"
+        app:srcCompat="@drawable/button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/comma_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/comma_text"
+        android:textColor="@color/mainTextColor"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/comma_button"
+        app:layout_constraintEnd_toEndOf="@+id/comma_button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/comma_button"
+        app:layout_constraintTop_toTopOf="@+id/comma_button"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/equal_button"
+        android:layout_width="@dimen/buttonSize"
+        android:layout_height="@dimen/buttonSize"
+        android:clickable="true"
+        android:onClick="equalActionEvent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline10"
+        app:layout_constraintEnd_toEndOf="@+id/plus_button"
+        app:layout_constraintStart_toStartOf="@+id/plus_button"
+        app:layout_constraintTop_toTopOf="@+id/fifthRowGuideline"
+        app:srcCompat="@drawable/blue_button_image"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/equal_button_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center"
+        android:text="@string/equal_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/buttonTextSize"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/equal_button"
+        app:layout_constraintEnd_toEndOf="@+id/equal_button"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/equal_button"
+        app:layout_constraintTop_toTopOf="@+id/equal_button"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="658dp" />
+
+    <TextView
+        android:id="@+id/currentOperatorViewer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/museo"
+        android:gravity="center"
+        android:textSize="@dimen/screenTextSize"
+        app:layout_constraintBottom_toTopOf="@+id/screenView"
+        app:layout_constraintEnd_toStartOf="@+id/mainGuideline2"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintStart_toEndOf="@+id/appName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.941" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:text="Жуть намучился"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/mainGuideline2"
+        app:layout_constraintStart_toStartOf="@+id/mainGuideline"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
