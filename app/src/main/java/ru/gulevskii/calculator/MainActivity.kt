@@ -7,267 +7,179 @@ import android.os.Handler
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main.*
+import ru.gulevskii.calculator.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-    private var numbers: Array<Double?> = arrayOf(null, null)
+open class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     private var lastAction = ""
-    var canInputNumberFlag = false
-    private var canInputDotFlag = false
-    var isMadeOperationAction = false
-    private var isMadeAction = false
+    private val logic = CalculatorLogic()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.numberButtonsGroup
+
+        clickListeners()
+    }
+
+    private fun clickListeners() {
+        numbersButtonClick()
+        mainActionsButtonsClick()
+        percentButtonClick()
+        negativeButtonClick()
+        equalButtonClick()
+    }
+
+
+    private fun numbersButtonClick() {
+        for (button in binding.numberButtonsGroup.referencedIds) {
+            findViewById<ImageView>(button).setOnClickListener {
+                var inputString = binding.screenText.text.toString()
+
+                makeClick(findViewById(button))
+                when (button) {
+                    R.id.zeroButton -> {
+                        if (inputString != "" && inputString[0] == '0' && inputString.length == 1) {
+                            Toast.makeText(
+                                this,
+                                "you can't do this!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        inputString = logic.addNumber(inputString, R.id.zeroButton)
+                    }
+                    R.id.oneButton -> inputString = logic.addNumber(inputString, R.id.oneButton)
+                    R.id.twoButton -> inputString = logic.addNumber(inputString, R.id.twoButton)
+                    R.id.threeButton -> inputString = logic.addNumber(inputString, R.id.threeButton)
+                    R.id.fourButton -> inputString = logic.addNumber(inputString, R.id.fourButton)
+                    R.id.fiveButton -> inputString = logic.addNumber(inputString, R.id.fiveButton)
+                    R.id.sixButton -> inputString = logic.addNumber(inputString, R.id.sixButton)
+                    R.id.sevenButton -> inputString = logic.addNumber(inputString, R.id.sevenButton)
+                    R.id.eightButton -> inputString = logic.addNumber(inputString, R.id.eightButton)
+                    R.id.nineButton -> inputString = logic.addNumber(inputString, R.id.nineButton)
+                    R.id.commaButton -> {
+                        if (!(inputString != "" && "." !in inputString)) {
+                            Toast.makeText(
+                                this,
+                                "you can't do it!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            inputString = logic.addNumber(inputString, R.id.commaButton)
+                        }
+
+                    }
+                    R.id.acButton -> {
+                        inputString = logic.addNumber(inputString, R.id.acButton)
+                        lastAction = ""
+                    }
+                }
+                binding.screenText.text = inputString
+            }
+
+        }
 
     }
 
-    fun numbersEvent(view: View) {
-        var inputString = screenText.text.toString()
-        isMadeOperationAction = false
+    private fun mainActionsButtonsClick() {
+        for (button in binding.mainActionsGroup.referencedIds) {
+            findViewById<ImageView>(button).setOnClickListener {
+                var inputString = binding.screenText.text.toString()
+                binding.screenText.text = ""
 
-        val bufferButton = view as ImageView
-        makeClick(bufferButton)
+                makeClick(it)
 
-        if (!canInputNumberFlag) {
-            if (isMadeAction) {
-                screenText.text = ""
-                inputString = ""
-                canInputNumberFlag = true
-            }
-        }
-        when (bufferButton.id) {
-            R.id.zero_button -> {
                 if (inputString == "") {
-                    inputString += "0"
-                } else {
-                    if (!(inputString[0] == '0' && inputString.length == 1)) {
-                        inputString += "0"
-                    } else {
-                        Toast.makeText(
-                            this,
-                            "you can't do it!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            }
-            R.id.one_button -> inputString += "1"
-            R.id.two_button -> inputString += "2"
-            R.id.three_button -> inputString += "3"
-            R.id.four_button -> inputString += "4"
-            R.id.five_button -> inputString += "5"
-            R.id.six_button -> inputString += "6"
-            R.id.seven_button -> inputString += "7"
-            R.id.eight_button -> inputString += "8"
-            R.id.nine_button -> inputString += "9"
-            R.id.comma_button -> {
-                if (inputString != "" && !canInputDotFlag) {
-                    inputString += "."
-                    canInputDotFlag = true
-                } else {
                     Toast.makeText(
                         this,
-                        "you can't do it!",
+                        "please, input a number",
                         Toast.LENGTH_SHORT
                     ).show()
-                }
-            }
-            R.id.ac_button -> {
-                numbers = arrayOf(null, null)
-                lastAction = ""
-                currentOperatorViewer.text = ""
-                inputString = ""
-                isMadeAction = false
-                canInputDotFlag = false
-            }
-        }
-        screenText.text = inputString
-
-    }
-
-    fun actionsEvents(view: View) {
-        canInputDotFlag = false
-        var inputString = screenText.text.toString()
-        screenText.text = ""
-
-        val bufferButton = view as ImageView
-        makeClick(bufferButton)
-
-        if (inputString == "") {
-            Toast.makeText(
-                this,
-                "please, input a number",
-                Toast.LENGTH_SHORT
-            ).show()
-        } else {
-            if (!isMadeOperationAction) {
-                when (bufferButton.id) {
-                    R.id.plus_button -> {
-                        if (!isMadeAction) {
-                            numbers[0] = inputString.toDouble()
-                            isMadeAction = true
-                        } else {
-                            numbers[1] = inputString.toDouble()
-                            solve()
-                        }
-                        lastAction = "+"
-                        printNumbers(numbers[0]!!)
-                        canInputNumberFlag = false
-                    }
-                    R.id.minus_button -> {
-                        if (!isMadeAction) {
-                            numbers[0] = inputString.toDouble()
-                            isMadeAction = true
-                        } else {
-                            numbers[1] = inputString.toDouble()
-                            solve()
-                        }
-                        lastAction = "-"
-                        printNumbers(numbers[0]!!)
-                        canInputNumberFlag = false
-                    }
-                    R.id.div_button -> {
-                        if (!isMadeAction) {
-                            numbers[0] = inputString.toDouble()
-                            isMadeAction = true
-                        } else {
-                            numbers[1] = inputString.toDouble()
-                            solve()
-                        }
-                        lastAction = "/"
-                        printNumbers(numbers[0]!!)
-                        canInputNumberFlag = false
-                    }
-                    R.id.multiply_button -> {
-                        if (!isMadeAction) {
-                            numbers[0] = inputString.toDouble()
-                            isMadeAction = true
-                        } else {
-                            numbers[1] = inputString.toDouble()
-                            solve()
-                        }
-                        lastAction = "*"
-                        printNumbers(numbers[0]!!)
-                        canInputNumberFlag = false
-                    }
-                }
-            } else {
-                when (bufferButton.id) {
-                    R.id.plus_button -> lastAction = "+"
-                    R.id.minus_button -> lastAction = "-"
-                    R.id.multiply_button -> lastAction = "*"
-                    R.id.div_button -> lastAction = "/"
-                }
-                screenText.text = inputString
-            }
-
-            currentOperatorViewer.text = lastAction
-        }
-        isMadeOperationAction = true
-    }
-
-    fun percentActionEvent(view: View) {
-        var inputString = screenText.text.toString()
-
-        view as ImageView
-        makeClick(view)
-
-        if (inputString == "" || numbers[0] == null) {
-            Toast.makeText(
-                this,
-                "Please, input the number",
-                Toast.LENGTH_SHORT
-            ).show()
-        } else {
-            currentOperatorViewer.text = "%"
-            numbers[1] = numbers[0]!! / 100.0 * inputString.toDouble()
-            solve()
-            printNumbers(numbers[0]!!)
-            isMadeOperationAction = true
-            canInputNumberFlag = false
-        }
-    }
-
-    fun makeNegativeEvent(view: View) {
-        var inputString = screenText.text.toString()
-
-        view as ImageView
-        makeClick(view)
-
-        if (inputString == "") {
-            Toast.makeText(
-                this,
-                "please, input a number",
-                Toast.LENGTH_SHORT
-            ).show()
-        } else {
-            if (!isMadeOperationAction) {
-                inputString = if (inputString.toDouble() < 0.0) {
-                    inputString.replace("-", "")
                 } else {
-                    "-$inputString"
+                    when (it.id) {
+                        R.id.plusButton -> {
+                            inputString = logic.makeActions(inputString, R.id.plusButton)
+                            lastAction = "+"
+                            binding.screenText.text = inputString
+                        }
+                        R.id.minusButton -> {
+                            inputString = logic.makeActions(inputString, R.id.minusButton)
+                            lastAction = "-"
+                            binding.screenText.text = inputString
+                        }
+                        R.id.divButton -> {
+                            inputString = logic.makeActions(inputString, R.id.divButton)
+                            lastAction = "/"
+                            binding.screenText.text = inputString
+                        }
+                        R.id.multiplyButton -> {
+                            inputString = logic.makeActions(inputString, R.id.multiplyButton)
+                            lastAction = "*"
+                            binding.screenText.text = inputString
+                        }
+                    }
+                    binding.currentOperatorViewer.text = lastAction
                 }
-                screenText.text = inputString
+            }
+        }
+    }
+
+    private fun percentButtonClick() {
+        binding.percentButton.setOnClickListener {
+            var inputString = binding.screenText.text.toString()
+            makeClick(it)
+            inputString = logic.makePercentAction(inputString)
+
+            if (inputString == "" || inputString == binding.screenText.text.toString()) {
+                Toast.makeText(
+                    this,
+                    "Please, input the number",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            binding.screenText.text = inputString
+            binding.currentOperatorViewer.text = "%"
+
+        }
+    }
+
+    private fun negativeButtonClick() {
+        binding.negativeButton.setOnClickListener {
+            val inputString = binding.screenText.text.toString()
+            makeClick(it)
+
+            if (inputString == "") {
+                Toast.makeText(this,
+                    "Please, input a number",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            binding.screenText.text = logic.makeNegativeAction(inputString)
+        }
+    }
+
+    private fun equalButtonClick() {
+        binding.equalButton.setOnClickListener {
+            var inputString: String = binding.screenText.text.toString()
+            makeClick(it)
+
+            if (inputString == "") {
+                Toast.makeText(
+                    this,
+                    "please, input a number",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
-                numbers[0] = -numbers[0]!!
-                printNumbers(numbers[0]!!)
+                inputString = logic.makeEqualAction(inputString)
+                 binding.currentOperatorViewer.text = "="
             }
+
+            lastAction = ""
+            binding.screenText.text = inputString
         }
-
-    }
-
-    fun equalActionEvent(view: View) {
-        var current: String = screenText.text.toString()
-        if (lastAction != "") {
-            if (!isMadeOperationAction) {
-                if (isMadeAction) {
-                    numbers[1] = current.toDouble()
-                    solve()
-                    current = numbers[0].toString()
-                }
-            }
-        }
-        view as ImageView
-        makeClick(view)
-
-        if (current == "") {
-            Toast.makeText(
-                this,
-                "please, input a number",
-                Toast.LENGTH_SHORT
-            ).show()
-        } else {
-            numbers[0] = current.toDouble()
-            printNumbers(numbers[0]!!)
-        }
-        canInputNumberFlag = false
-        isMadeAction = false
-        isMadeOperationAction = false
-        currentOperatorViewer.text = "="
-        lastAction = ""
-        numbers = arrayOf(null, null)
-
-    }
-
-    private fun printNumbers(number: Double) {
-        if (number - number.toInt() == 0.0) {
-            val temp: Int = number.toInt()
-            screenText.text = temp.toString()
-        } else {
-            screenText.text = number.toString()
-        }
-    }
-
-    private fun solve() {
-        when (lastAction) {
-            "*" -> numbers[0] = numbers[0]!! * numbers[1]!!
-            "+" -> numbers[0] = numbers[0]!! + numbers[1]!!
-            "-" -> numbers[0] = numbers[0]!! - numbers[1]!!
-            "/" -> numbers[0] = numbers[0]!! / numbers[1]!!
-        }
-        numbers[1] = null
     }
 
     private fun makeClick(view: View) {
@@ -276,6 +188,7 @@ class MainActivity : AppCompatActivity() {
             kotlin.run { view.setBackgroundColor(Color.TRANSPARENT) }
         }, 50)
     }
+
 
 }
 
