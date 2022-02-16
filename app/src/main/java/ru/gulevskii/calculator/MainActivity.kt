@@ -1,11 +1,10 @@
 package ru.gulevskii.calculator
 
-import android.graphics.Color
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import ru.gulevskii.calculator.databinding.ActivityMainBinding
 
@@ -19,12 +18,11 @@ open class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.numberButtonsGroup
 
-        clickListeners()
+        setupClickListeners()
     }
 
-    private fun clickListeners() {
+    private fun setupClickListeners() {
         numbersButtonClick()
         mainActionsButtonsClick()
         percentButtonClick()
@@ -35,7 +33,7 @@ open class MainActivity : AppCompatActivity() {
 
     private fun numbersButtonClick() {
         for (button in binding.numberButtonsGroup.referencedIds) {
-            findViewById<ImageView>(button).setOnClickListener {
+            findViewById<View>(button).setOnClickListener {
                 var inputString = binding.screenText.text.toString()
 
                 makeClick(findViewById(button))
@@ -44,36 +42,46 @@ open class MainActivity : AppCompatActivity() {
                         if (inputString != "" && inputString[0] == '0' && inputString.length == 1) {
                             Toast.makeText(
                                 this,
-                                "you can't do this!",
+                                resources.getString(R.string.toast_impossibility),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
-                        inputString = logic.addNumber(inputString, R.id.zeroButton)
+                        inputString = logic.addNumber(inputString, binding.zeroButton.text.toString())
                     }
-                    R.id.oneButton -> inputString = logic.addNumber(inputString, R.id.oneButton)
-                    R.id.twoButton -> inputString = logic.addNumber(inputString, R.id.twoButton)
-                    R.id.threeButton -> inputString = logic.addNumber(inputString, R.id.threeButton)
-                    R.id.fourButton -> inputString = logic.addNumber(inputString, R.id.fourButton)
-                    R.id.fiveButton -> inputString = logic.addNumber(inputString, R.id.fiveButton)
-                    R.id.sixButton -> inputString = logic.addNumber(inputString, R.id.sixButton)
-                    R.id.sevenButton -> inputString = logic.addNumber(inputString, R.id.sevenButton)
-                    R.id.eightButton -> inputString = logic.addNumber(inputString, R.id.eightButton)
-                    R.id.nineButton -> inputString = logic.addNumber(inputString, R.id.nineButton)
+                    R.id.oneButton ->
+                        inputString = logic.addNumber(inputString, binding.oneButton.text.toString())
+                    R.id.twoButton ->
+                        inputString = logic.addNumber(inputString, binding.twoButton.text.toString())
+                    R.id.threeButton ->
+                        inputString = logic.addNumber(inputString, binding.threeButton.text.toString())
+                    R.id.fourButton ->
+                        inputString = logic.addNumber(inputString, binding.fourButton.text.toString())
+                    R.id.fiveButton ->
+                        inputString = logic.addNumber(inputString,binding.fiveButton.text.toString())
+                    R.id.sixButton ->
+                        inputString = logic.addNumber(inputString, binding.sixButton.text.toString())
+                    R.id.sevenButton ->
+                        inputString = logic.addNumber(inputString, binding.sevenButton.text.toString())
+                    R.id.eightButton ->
+                        inputString = logic.addNumber(inputString, binding.eightButton.text.toString())
+                    R.id.nineButton ->
+                        inputString = logic.addNumber(inputString, binding.nineButton.text.toString())
                     R.id.commaButton -> {
                         if (!(inputString != "" && "." !in inputString)) {
                             Toast.makeText(
                                 this,
-                                "you can't do it!",
+                                resources.getString(R.string.toast_impossibility),
                                 Toast.LENGTH_SHORT
                             ).show()
                         } else {
-                            inputString = logic.addNumber(inputString, R.id.commaButton)
+                            inputString = logic.addNumber(inputString, binding.commaButton.text.toString())
                         }
 
                     }
                     R.id.acButton -> {
-                        inputString = logic.addNumber(inputString, R.id.acButton)
+                        inputString = logic.addNumber(inputString,binding.acButton.text.toString())
                         lastAction = ""
+                        binding.currentOperatorViewer.text = ""
                     }
                 }
                 binding.screenText.text = inputString
@@ -85,37 +93,37 @@ open class MainActivity : AppCompatActivity() {
 
     private fun mainActionsButtonsClick() {
         for (button in binding.mainActionsGroup.referencedIds) {
-            findViewById<ImageView>(button).setOnClickListener {
+            findViewById<View>(button).setOnClickListener {
                 var inputString = binding.screenText.text.toString()
                 binding.screenText.text = ""
 
-                makeClick(it)
+                makeClickForOperations(it)
 
                 if (inputString == "") {
                     Toast.makeText(
                         this,
-                        "please, input a number",
+                        resources.getString(R.string.toast_input_number),
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     when (it.id) {
                         R.id.plusButton -> {
-                            inputString = logic.makeActions(inputString, R.id.plusButton)
+                            inputString = logic.makeActions(inputString, binding.plusButton.text.toString())
                             lastAction = "+"
                             binding.screenText.text = inputString
                         }
                         R.id.minusButton -> {
-                            inputString = logic.makeActions(inputString, R.id.minusButton)
+                            inputString = logic.makeActions(inputString, binding.minusButton.text.toString())
                             lastAction = "-"
                             binding.screenText.text = inputString
                         }
                         R.id.divButton -> {
-                            inputString = logic.makeActions(inputString, R.id.divButton)
+                            inputString = logic.makeActions(inputString, binding.divButton.text.toString())
                             lastAction = "/"
                             binding.screenText.text = inputString
                         }
                         R.id.multiplyButton -> {
-                            inputString = logic.makeActions(inputString, R.id.multiplyButton)
+                            inputString = logic.makeActions(inputString, binding.multiplyButton.text.toString())
                             lastAction = "*"
                             binding.screenText.text = inputString
                         }
@@ -135,7 +143,7 @@ open class MainActivity : AppCompatActivity() {
             if (inputString == "" || inputString == binding.screenText.text.toString()) {
                 Toast.makeText(
                     this,
-                    "Please, input the number",
+                    resources.getString(R.string.toast_input_number),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -152,7 +160,7 @@ open class MainActivity : AppCompatActivity() {
 
             if (inputString == "") {
                 Toast.makeText(this,
-                    "Please, input a number",
+                    resources.getString(R.string.toast_input_number),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -164,12 +172,12 @@ open class MainActivity : AppCompatActivity() {
     private fun equalButtonClick() {
         binding.equalButton.setOnClickListener {
             var inputString: String = binding.screenText.text.toString()
-            makeClick(it)
+            makeClickForOperations(it)
 
             if (inputString == "") {
                 Toast.makeText(
                     this,
-                    "please, input a number",
+                    resources.getString(R.string.toast_input_number),
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
@@ -182,10 +190,19 @@ open class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun makeClick(view: View) {
-        view.setBackgroundColor(resources.getColor(R.color.clickColor, null))
+        view.background = resources.getDrawable(R.drawable.clicked_button_image, null)
         Handler().postDelayed({
-            kotlin.run { view.setBackgroundColor(Color.TRANSPARENT) }
+            kotlin.run { view.background = resources.getDrawable(R.drawable.button_image, null) }
+        }, 50)
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun makeClickForOperations(view: View) {
+        view.background = resources.getDrawable(R.drawable.clicked_blue_button_image, null)
+        Handler().postDelayed({
+            kotlin.run { view.background = resources.getDrawable(R.drawable.blue_button_image, null) }
         }, 50)
     }
 

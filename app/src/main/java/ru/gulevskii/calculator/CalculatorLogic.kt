@@ -2,7 +2,7 @@ package ru.gulevskii.calculator
 
 import java.text.DecimalFormat
 
-class CalculatorLogic() {
+class CalculatorLogic {
     private var numbers: Array<Double?> = arrayOf(null, null)
     private var lastAction = ""
     private var canInputNumberFlag = false
@@ -10,7 +10,7 @@ class CalculatorLogic() {
     private var isMadeOperationAction = false
     private var isMadeAction = false
 
-    fun addNumber(currentText: String, buttonId: Int): String {
+    fun addNumber(currentText: String, buttonText: String): String {
         var inputString = currentText
         isMadeOperationAction = false
         if (!canInputNumberFlag) {
@@ -19,8 +19,8 @@ class CalculatorLogic() {
                 canInputNumberFlag = true
             }
         }
-        when (buttonId) {
-            R.id.zeroButton -> {
+        when (buttonText) {
+            "0" -> {
                 if (inputString == "") {
                     inputString += "0"
                 } else {
@@ -29,22 +29,22 @@ class CalculatorLogic() {
                     }
                 }
             }
-            R.id.oneButton -> inputString += "1"
-            R.id.twoButton -> inputString += "2"
-            R.id.threeButton -> inputString += "3"
-            R.id.fourButton -> inputString += "4"
-            R.id.fiveButton -> inputString += "5"
-            R.id.sixButton -> inputString += "6"
-            R.id.sevenButton -> inputString += "7"
-            R.id.eightButton -> inputString += "8"
-            R.id.nineButton -> inputString += "9"
-            R.id.commaButton -> {
+            "1" -> inputString += "1"
+            "2" -> inputString += "2"
+            "3" -> inputString += "3"
+            "4" -> inputString += "4"
+            "5" -> inputString += "5"
+            "6" -> inputString += "6"
+            "7" -> inputString += "7"
+            "8" -> inputString += "8"
+            "9" -> inputString += "9"
+            "," -> {
                 if (inputString != "" && !canInputDotFlag) {
                     inputString += "."
                     canInputDotFlag = true
                 }
             }
-            R.id.acButton -> {
+            "ac" -> {
                 numbers = arrayOf(null, null)
                 lastAction = ""
                 inputString = ""
@@ -55,13 +55,14 @@ class CalculatorLogic() {
         return inputString
     }
 
-    fun makeActions(currentText: String, buttonId: Int): String {
+    fun makeActions(currentText: String, buttonText: String): String {
+        canInputDotFlag = false
         var inputString = currentText
-        if (buttonId != R.id.equalButton )
+        if (buttonText != "=" )
         if (inputString != "") {
             if (!isMadeOperationAction) {
-                when (buttonId) {
-                    R.id.plusButton -> {
+                when (buttonText) {
+                    "+" -> {
                         if (!isMadeAction) {
                             numbers[0] = inputString.toDouble()
                             isMadeAction = true
@@ -73,7 +74,7 @@ class CalculatorLogic() {
                         inputString = printNumbers(numbers[0]!!)
                         canInputNumberFlag = false
                     }
-                    R.id.minusButton -> {
+                    "-" -> {
                         if (!isMadeAction) {
                             numbers[0] = inputString.toDouble()
                             isMadeAction = true
@@ -85,7 +86,7 @@ class CalculatorLogic() {
                         inputString = printNumbers(numbers[0]!!)
                         canInputNumberFlag = false
                     }
-                    R.id.divButton -> {
+                    "÷" -> {
                         if (!isMadeAction) {
                             numbers[0] = inputString.toDouble()
                             isMadeAction = true
@@ -97,7 +98,7 @@ class CalculatorLogic() {
                         inputString = printNumbers(numbers[0]!!)
                         canInputNumberFlag = false
                     }
-                    R.id.multiplyButton -> {
+                    "x" -> {
                         if (!isMadeAction) {
                             numbers[0] = inputString.toDouble()
                             isMadeAction = true
@@ -111,11 +112,11 @@ class CalculatorLogic() {
                     }
                 }
             } else {
-                when (buttonId) {
-                    R.id.plusButton -> lastAction = "+"
-                    R.id.minusButton -> lastAction = "-"
-                    R.id.multiplyButton -> lastAction = "*"
-                    R.id.divButton -> lastAction = "/"
+                when (buttonText) {
+                    "+" -> lastAction = "+"
+                    "-" -> lastAction = "-"
+                    "x" -> lastAction = "*"
+                    "÷" -> lastAction = "/"
                 }
             }
         }
@@ -141,6 +142,7 @@ class CalculatorLogic() {
         }
         canInputNumberFlag = false
         isMadeAction = false
+        canInputDotFlag = true
         isMadeOperationAction = false
         lastAction = ""
         numbers = arrayOf(null, null)
