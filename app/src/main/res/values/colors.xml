@@ -11,4 +11,7 @@
     <color name="backgroundColor">#E5E5E5</color>
     <color name="textColor">#373A37</color>
     <color name="clickColor">#43000000</color>
+    <color name="buttonColor">#F1F3F6</color>
+    <color name="blueButtonColor">#3A4E89</color>
+
 </resources>

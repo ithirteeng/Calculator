@@ -4,5 +4,8 @@
     <dimen name="rightMargin">14sp </dimen>
     <dimen name="buttonTextSize">26sp</dimen>
     <dimen name="screenTextSize">40sp</dimen>
-    <dimen name="buttonSize">88dp</dimen>
+    <dimen name="buttonSize">70dp</dimen>
+    <dimen name="bigButtonWidth">160dp</dimen>
+    <dimen name="elevation">5dp</dimen>
+    <dimen name="translation">5dp</dimen>
 </resources>

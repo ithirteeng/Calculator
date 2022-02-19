@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="whiteButtonsStyle">
+        <item name="android:background">@drawable/button</item>
+        <item name="android:outlineSpotShadowColor">@color/black</item>
+        <item name="android:stateListAnimator">@animator/button_animation</item>
+        <item name="android:textSize">@dimen/buttonTextSize</item>
+        <item name="android:layout_width">@dimen/buttonSize</item>
+        <item name="android:layout_height">@dimen/buttonSize</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textColor">@color/mainTextColor</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

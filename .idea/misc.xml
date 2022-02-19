@@ -3,8 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/CalculatorProject/app/src/main/res/drawable/big_button.xml" value="0.16973684210526316" />
+        <entry key="..\:/AndroidProjects/CalculatorProject/app/src/main/res/drawable/blue_button.xml" value="0.16807817589576549" />
+        <entry key="..\:/AndroidProjects/CalculatorProject/app/src/main/res/drawable/button.xml" value="0.16973684210526316" />
+        <entry key="..\:/AndroidProjects/CalculatorProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.16973684210526316" />
+        <entry key="..\:/AndroidProjects/CalculatorProject/app/src/main/res/drawable/shadow.xml" value="0.16973684210526316" />
         <entry key="..\:/AndroidProjects/CalculatorProject/app/src/main/res/font/montserrat.xml" value="0.17861842105263157" />
-        <entry key="..\:/AndroidProjects/CalculatorProject/app/src/main/res/layout/activity_main.xml" value="0.536" />
+        <entry key="..\:/AndroidProjects/CalculatorProject/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/CalculatorProject/app/src/main/res/layout/dgsdf.xml" value="0.264" />
       </map>
     </option>

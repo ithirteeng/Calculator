@@ -35,7 +35,6 @@ open class MainActivity : AppCompatActivity() {
         for (button in binding.numberButtonsGroup.referencedIds) {
             findViewById<View>(button).setOnClickListener {
                 var inputString = binding.screenText.text.toString()
-                makeClick(findViewById(button))
 
                 if (inputString.length >= 10 && !isMadeAction) {
                     if (button == R.id.acButton) {
@@ -130,7 +129,6 @@ open class MainActivity : AppCompatActivity() {
                 var inputString = binding.screenText.text.toString()
                 binding.screenText.text = ""
                 isMadeAction = true
-                makeClickForOperations(it)
 
                 if (inputString == "") {
                     Toast.makeText(
@@ -176,7 +174,6 @@ open class MainActivity : AppCompatActivity() {
     private fun percentButtonClick() {
         binding.percentButton.setOnClickListener {
             var inputString = binding.screenText.text.toString()
-            makeClick(it)
             inputString = logic.makePercentAction(inputString)
 
             if (inputString == "" || inputString == binding.screenText.text.toString()) {
@@ -195,7 +192,6 @@ open class MainActivity : AppCompatActivity() {
     private fun negativeButtonClick() {
         binding.negativeButton.setOnClickListener {
             val inputString = binding.screenText.text.toString()
-            makeClick(it)
 
             if (inputString == "") {
                 Toast.makeText(
@@ -212,7 +208,6 @@ open class MainActivity : AppCompatActivity() {
     private fun equalButtonClick() {
         binding.equalButton.setOnClickListener {
             var inputString: String = binding.screenText.text.toString()
-            makeClickForOperations(it)
 
             if (inputString == "") {
                 Toast.makeText(
@@ -230,23 +225,7 @@ open class MainActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    private fun makeClick(view: View) {
-        view.background = resources.getDrawable(R.drawable.clicked_button_image, null)
-        Handler().postDelayed({
-            kotlin.run { view.background = resources.getDrawable(R.drawable.button_image, null) }
-        }, 50)
-    }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    private fun makeClickForOperations(view: View) {
-        view.background = resources.getDrawable(R.drawable.clicked_blue_button_image, null)
-        Handler().postDelayed({
-            kotlin.run {
-                view.background = resources.getDrawable(R.drawable.blue_button_image, null)
-            }
-        }, 50)
-    }
 
 
 }
