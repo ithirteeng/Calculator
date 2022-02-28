@@ -205,7 +205,7 @@ class CalculatorLogic {
 
         if (inputString[0] == '-') isNegative = true
         if (isNegative) outputString = outputString.replace("-", "")
-        var number = outputString.toDouble()
+        val number = outputString.toDouble()
 
         var degreeCounter = 0
         if (number < 1) {
